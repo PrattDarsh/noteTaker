@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+
+    <title>Speech to Text</title>
+</head>
+<style>
+    body {
+        background-color: #faf0be;
+        font-family: 'Gloria Hallelujah', cursive;
+    }
+
+    ::-webkit-scrollbar {
+        width: 7px;
+        background: faf0be;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #967117;
+        box-shadow: 0 -100vh 0 100vh #967117;
+    }
+
+</style>
+
+<body>
+    <section class="flex relative">
+        <img src="bird.svg" class="absolute right-6 md:right-32 w-28 md:w-56" alt="">
+        <img src="comp.svg" class="absolute bottom-0 left-12 md:left-32  w-28 md:w-56" alt="">
+        <div class="space-y-12 mt-12 ml-4">
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+            <div class="bg-black rounded-full p-2 md:p-4 w-2"></div>
+        </div>
+
+        <div class="words max-w-6xl mx-auto my-12" contenteditable>
+            <div class="text-center text-7xl underline">Today's Notes</div>
+            <p id="p" class="text-2xl mt-12"></p>
+        </div>
+    </section>
+
+
+    <script>
+        var speech = true;
+        window.SpeechRecognition = window.SpeechRecognition
+            || window.webkitSpeechRecognition;
+
+        const recognition = new SpeechRecognition();
+        recognition.interimResults = true;
+        recognition.continuous = true;
+        const words = document.querySelector('.words');
+        words.appendChild(p);
+
+        recognition.addEventListener('result', e => {
+            const transcript = Array.from(e.results)
+                .map(result => result[0])
+                .map(result => result.transcript)
+                .join('')
+
+            document.getElementById("p").innerHTML = transcript;
+            console.log(transcript.length)
+
+            if (transcript == 'attendance') {
+                alert('dinesh')
+            }
+
+            // if (transcript == 'attendance') {
+            //     alert('dinesh')
+            // }
+
+            // if (document.getElementById("p").innerHTML == "attendance") {
+            //     alert('hello')
+            // }
+
+
+
+
+
+
+        });
+
+        if (speech == true) {
+            recognition.start();
+            recognition.addEventListener('end', recognition.start);
+        }
+    </script>
+</body>
+
+</html>
